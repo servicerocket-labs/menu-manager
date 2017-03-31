@@ -1,0 +1,13 @@
+.idea
+*.iml
+*.ipr
+*.iws
+target
+src/main/resources/assets/js/jquery/
+src/main/resources/assets/js/requirejs/
+src/main/resources/assets/js/security/node_modules/
+src/main/js/.build/
+src/main/js/lib/
+src/main/js/node/
+src/main/js/node_modules/
+src/main/resources/js/

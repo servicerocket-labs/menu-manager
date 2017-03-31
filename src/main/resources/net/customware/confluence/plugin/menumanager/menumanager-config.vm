@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<title>$action.getText("menumanager.config.title")</title>
+    #requireResource("net.customware.confluence.plugin.menumanager:resources")
+    <meta name="decorator" content="alt.general"/>
+	</head>
+	<body>
+            #parse ( "/template/includes/actionerrors.vm" )
+
+            <div>
+            <div class="mm-description">
+                $action.getText("menumanager.config.description")
+            </div>
+
+            <form action="$req.contextPath/admin/plugins/menumanager/config.action" id="mm-form" method="POST">
+              #form_xsrfToken()
+            
+            <div class="mm-global-actions">
+              <a href="#" class="mm-expand-all">$action.getText( "menumanager.expandAll" )</a> |
+              <a href="#" class="mm-contract-all">$action.getText( "menumanager.collapseAll" )</a>
+            </div>
+
+            <div class="mm-locations">
+            #foreach ($location in $locations)
+              <div class="mm-location">
+                <div class="mm-header">
+                  <div class="mm-title steptitle" title="$!generalUtil.htmlEncode($location.name)">$!location.label</div>
+                  <div class="mm-content-count">($location.fragments.size())</div>
+                  <div class="mm-details smalltext">$!location.details</div>
+                </div>
+                <div class="mm-fragment-details">
+                <ul class="mm-fragments mm-fragments-0">
+                #foreach($fragment in $location)
+                  #set( $itemClass = "mm-fragment mm-fragment-0" )
+                  #if( $action.isSection( $fragment ) )
+                    #set( $itemClass = "$itemClass mm-section" )
+                    ##set( $type = "section" )
+                  #else
+                    #set( $itemClass = "$itemClass mm-item" )
+                    ##set( $type = "item" )
+                  #end
+                  #if( $action.isEnabled( $fragment ) )
+                    #set( $itemClass = "$itemClass mm-enabled" )
+                    ##set( $enabledClass = "mm-enabled" )
+                  #else
+                    #set( $itemClass = "$itemClass mm-disabled" )
+                    ##set( $enabledClass = "mm-disabled" )
+                  #end
+                  #if ( $fragment.descriptor.styleClass )
+                    #set( $itemClass = "$itemClass $fragment.descriptor.styleClass" )
+                  #end
+                  #set( $pluginEnabled = $action.isPluginEnabled( $fragment ) )
+                  <li class="$itemClass">
+                    <div class="mm-header">
+                      <select class="mm-status" name="$generalUtil.htmlEncode($fragment.moduleKey)" #if( !$pluginEnabled ) disabled="disabled" #end>
+                        <option value="enabled" #if( $action.isEnabled( $fragment ) ) selected="selected" #end>$action.getText("menumanager.fragment.enabled")</option>
+                        <option value="disabled" #if( !$action.isEnabled( $fragment ) ) selected="selected" #end>$action.getText("menumanager.fragment.disabled")</option>
+                      </select>
+                      #if ( $fragment.descriptor.icon )
+                        #set( $icon = $fragment.descriptor.icon )
+                        <img class="mm-icon" src="$icon.url.getDisplayableUrl($req, $action.webInterfaceContext)" height="$icon.height" width="$icon.width">
+                      #end
+                      <div class="mm-title" title="$!generalUtil.htmlEncode($fragment.locationKey)">
+                        $fragment.label</div>
+                      #if( $action.isSection( $fragment ) ) <div class="mm-content-count">($fragment.items.size())</div> #end
+                      <div class="mm-actions">
+                        <a href="#" class="mm-more-details">$action.getText( "menumanager.details.label" )</a>
+                      </div>
+                    </div>
+                    <div class="mm-fragment-details">
+                      <table class="mm-details smalltext">
+                        <tr>
+                          <th>$action.getText( "menumanager.details.location" ):</th>
+                          <td>$generalUtil.htmlEncode($fragment.locationKey)</td>
+                        </tr>
+                        <tr>
+                          <th>$action.getText( "menumanager.details.weight" ):</th>
+                          <td>$fragment.weight</td>
+                        </tr>
+                        #if( $item.link )
+                        <tr>
+                          <th>$action.getText( "menumanager.details.link" ):</th>
+                          <td>$item.link</td>
+                        </tr>
+                        #end
+                        <tr>
+                          <th>$action.getText( "menumanager.details.plugin" ):</th>
+                          <td><a href="../../viewplugins.action?pluginKey=$generalUtil.htmlEncode($fragment.pluginKey)">$generalUtil.htmlEncode( $fragment.pluginName )</a></td>
+                        </tr>
+                        #if( $fragment.description )
+                        <tr>
+                          <td colspan="2" class="smalltext">$fragment.description</td>
+                        </tr>
+                        #end
+                      </table>
+                      #if( $action.isSection( $fragment ) )
+                        <ul class="mm-fragments mm-fragments-1">
+                        #foreach($item in $fragment.items)
+                          #if( $action.isEnabled( $item ) )
+                            #set( $enabledClass = "mm-enabled" )
+                          #else
+                            #set( $enabledClass = "mm-disabled" )
+                          #end
+                          #set( $pluginEnabled = $action.isPluginEnabled( $item ) )
+                          <li class="mm-fragment mm-fragment-1 mm-item $enabledClass">
+                            <div class="mm-header">
+                              <select class="mm-status" name="$generalUtil.htmlEncode($item.moduleKey)" #if( !$pluginEnabled ) disabled="disabled" #end>
+                                <option value="enabled" #if( $action.isEnabled( $item ) ) selected="selected" #end>$action.getText("menumanager.fragment.enabled")</option>
+                                <option value="disabled" #if( !$action.isEnabled( $item ) ) selected="selected" #end>$action.getText("menumanager.fragment.disabled")</option>
+                              </select>
+                              #if ( $item.descriptor.icon )
+                                #set( $icon = $item.descriptor.icon )
+                                <img class="mm-icon" src="$icon.url.getDisplayableUrl($req, $action.webInterfaceContext)" height="$icon.height" width="$icon.width">
+                              #end
+                              <div class="mm-title" title="$!generalUtil.htmlEncode($item.locationKey)">$item.label</div>   
+            				  <div class="mm-actions">
+                                <a href="#" class="mm-more-details">$action.getText( "menumanager.details.label" )</a>
+                              </div>
+                            </div>
+                            <div class="mm-fragment-details">
+                              <table class="mm-details">
+                                <tr>
+                                  <th>$action.getText( "menumanager.details.location" ):</th>
+                                  <td>$generalUtil.htmlEncode($item.locationKey)</td>
+                                </tr>
+                                <tr>
+                                  <th>$action.getText( "menumanager.details.weight" ):</th>
+                                  <td>$item.weight</td>
+                                </tr>
+                                #if( $item.link )
+                                <tr>
+                                  <th>$action.getText( "menumanager.details.link" ):</th>
+                                  <td>$item.link</td>
+                                </tr>
+                                #end
+                                <tr>
+                                  <th>$action.getText( "menumanager.details.plugin" ):</th>
+                                  <td><a href="../../viewplugins.action?pluginKey=$generalUtil.htmlEncode($item.pluginKey)">$generalUtil.htmlEncode( $item.pluginName )</a></td>
+                                </tr>
+                                #if( $item.description )
+                                <tr>
+                                  <td colspan="2" class="smalltext">$item.description</td>
+                                </tr>
+                                #end
+                              </table>
+                            </div>
+                          </li>
+                        #end
+                        </ul>
+                      #end
+                    </div>
+                  </li>
+                #end
+                </ul>
+                </div>
+              </div>
+            #end
+            </div>
+
+              <input type="submit" name="update" value="$action.getText("menumanager.config.update")">
+            </form>
+          </div>
+		#parse ( "/breadcrumbs.vm" )
+	</body>
+</html>

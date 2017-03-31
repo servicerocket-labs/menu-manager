@@ -1,0 +1,98 @@
+.mm-description {
+	padding: 10px;
+	border: 1px solid #ccc;
+	background-color: #f0f0f0;
+	margin: 0px;
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+.mm-title {
+	display: inline;
+}
+
+.mm-content-count {
+	display: inline;
+}
+
+.mm-location > .mm-header >.mm-title {
+	font-weight: normal;
+	font-size: medium;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.mm-section >.mm-header>.mm-title {
+	font-weight: bold;
+}
+
+.mm-title {
+  text-decoration: underline;
+	cursor: pointer;
+}
+
+.mm-locations li {
+	list-style: none;
+	padding: 0px;
+	margin: 5px;
+}
+
+.mm-locations ul {
+	padding: 0px;
+}
+
+.mm-header {
+	padding: 3px;
+	height:  30px; 
+}
+
+.mm-location {
+	margin-top: 8px;
+}
+
+.mm-fragment {
+	border: 1px solid gray;
+}
+
+.mm-enabled > .mm-header {
+	background: #DDFFDD;
+}
+
+.mm-disabled > .mm-header {
+	background: #FFDDDD;
+}
+
+.mm-changed {
+	border-color: brown;
+}
+
+.mm-changed > .mm-header > .mm-title {
+	font-style: italic;
+}
+
+.mm-details {
+	display: false;
+}
+
+.mm-locations select {
+	float: right;
+	margin: 0px;
+}
+
+/* These seem to only work in Firefox */
+.mm-locations option[value=enabled] {
+	color: green;
+}
+
+.mm-locations option[value=disabled] {
+	color: red;
+}
+
+.mm-actions {
+	float: right;
+	margin: 0px 5px;
+}
+
+.mm-fragment-details {
+	display: none;
+}
