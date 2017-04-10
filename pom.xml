@@ -16,7 +16,12 @@
     <packaging>atlassian-plugin</packaging>
 
     <name>Menu Manager</name>
-    <description>Allows administrators to enable or disable menu items across the server.</description>
+    <description>
+        Allows administrators to enable or disable menu items across the server. &lt;br&gt; &lt;br&gt;
+
+        &lt;em&gt;Note: This add-on is now open-sourced. &lt;br&gt;
+        For compatibility updates, you can build from source code available at https://github.com/ServiceRocket/menu-manager.&lt;/em&gt;
+    </description>
 
     <scm>
         <connection>scm:git:ssh://git@github.com:ServiceRocket/menu-manager.git</connection>
