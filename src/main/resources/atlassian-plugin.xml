@@ -1,6 +1,6 @@
 <atlassian-plugin key="${atlassian.plugin.key}" name="Menu Manager" plugins-version="2">
 	<plugin-info>
-		<description>${pom.description}</description>
+		<description><![CDATA[${pom.description}]]></description>
 		<version>${pom.version}</version>
 		<vendor name="${pom.organization.name}" url="${pom.organization.url}" />
 		<param name="configure.url">/admin/plugins/menumanager/config.action</param>
@@ -44,20 +44,17 @@
 		<interface>net.customware.atlassian.menu.MenuManager</interface>
 	</component>
 
-    <web-section key="2JJTO7VWVUZLRG7OCRYIBNXXQXG60Z3Z-section"
-                 name="CustomWare Composition Plugin for Confluence Section" location="system.admin" weight="105">
-        <description>CustomWare Plugins for Confluence section.</description>
-        <label key="2JJTO7VWVUZLRG7OCRYIBNXXQXG60Z3Z-section.label"/>
-        <condition class="net.customware.confluence.plugin.menumanager.CwWebsectionExist"/>
+    <web-section key="menu-manager-section"
+                 name="ServiceRocket Menu Manager Plugin for Confluence Section" location="system.admin" weight="105">
+        <description>ServiceRocket Menu Manager section.</description>
+        <label key="menumanager.web-section.label"/>
     </web-section>
 
 
-    <web-item key="57VZMEUNH8V5FV1ZBG34PH93FNUABSL6-config" name="CustomWare Menu Manager Plugin for Confluence Config " section="system.admin/2JJTO7VWVUZLRG7OCRYIBNXXQXG60Z3Z-section" weight="10">
+    <web-item key="57VZMEUNH8V5FV1ZBG34PH93FNUABSL6-config" name="CustomWare Menu Manager Plugin for Confluence Config " section="system.admin/menu-manager-section" weight="10">
         <description>CustomWare Menu Manager Plugin for Confluence Configuration link.</description>
-        <label key="57VZMEUNH8V5FV1ZBG34PH93FNUABSL6-license.label" />
+        <label key="menumanager.web-item.label" />
         <link linkId="57VZMEUNH8V5FV1ZBG34PH93FNUABSL6-link">/admin/plugins/menumanager/config.action</link>
     </web-item>
-
-       <resource name="license-plugin" type="i18n" location="net.customware.confluence.plugin.menumanager.ConfluenceLicenseAction"/>
 
 </atlassian-plugin>
