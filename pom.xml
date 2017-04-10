@@ -11,7 +11,7 @@
 
     <groupId>net.customware.confluence.plugin.menumanager</groupId>
     <artifactId>menu-manager-plugin</artifactId>
-    <version>3.4.0</version>
+    <version>3.4.1-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>Menu Manager</name>
@@ -26,7 +26,7 @@
         <connection>scm:git:ssh://git@github.com/ServiceRocket/menu-manager.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/ServiceRocket/menu-manager.git</developerConnection>
         <url>https://github.com/ServiceRocket/menu-manager</url>
-        <tag>3.4.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
